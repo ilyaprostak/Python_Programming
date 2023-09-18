@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Заметки</title>
+
+</head>
+<body>
+ <h1>Заметки</h1>
+ <form method="POST">
+  <input type="text" name="text" placeholder="Текст заметки">
+  <input type="checkbox" name="important" id="important">
+  <label for="important">Важно</label>
+  <br>
+  <button type="submit">Добавить</button>
+ </form>
+ <table>
+  <tr>
+   <th>Текст заметки</th>
+   <th>Важность</th>
+  </tr>
+  {% for note in notes %}
+  <tr>
+   <td>{{ note.text }}</td>
+   <td class="{% if note.important %}important{% endif %}">{% if note.important %}Да{% else %}Нет{% endif %}</td>
+  </tr>
+  {% endfor %}
+ </table>
+ <button onclick="clearNotes()">Clear</button>
+ <script type="text/javascript">
+  function clearNotes() {
+   if (confirm('Вы действительно хотите очистить все заметки?')) {
+    window.location.href = '/clear';
+   }
+  }
+ </script>
+</body>
+</html>
